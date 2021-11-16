@@ -26,7 +26,7 @@ const insertDataEntry = `INSERT INTO data_entry(
 	device_status,
 	plant_id) VALUES(to_timestamp($1), $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`;
 
-fs.readFile("newFile3.txt", "utf8", (err, data) => {
+fs.readFile("../raw_data/scrape_01.txt", "utf8", (err, data) => {
   if (err) {
     console.error(err);
     return;
@@ -59,7 +59,7 @@ fs.readFile("newFile3.txt", "utf8", (err, data) => {
 
     vrijednosti[12] = vrijednosti[12] / 100;
 
-    vrijednosti.push(1);
+    vrijednosti.push(3);
 
     pool.query(insertDataEntry, vrijednosti, (err, res) => {
       if (err) {

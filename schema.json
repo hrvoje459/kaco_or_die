@@ -1,0 +1,170 @@
+{
+	"$schema": "https://json-schema.org/draft/2020-12/schema",
+	"$id": "https://local.domena.hrvoje/product.schema.json",
+	"title": "Kaco JSON",
+	"description": "Power plant data with measurements",
+	"type": "object",
+	"properties": {
+		"json_agg": {
+			"description": "Array of power plants",
+			"type": "array",
+			"items": {
+				"type": "object"
+			},
+			"properties": {
+				"power_plant": {
+					"type": "object",
+					"properties": {
+						"plant_id": {
+							"type": "number"
+						},
+						"plant_name": {
+							"type": "string"
+						},
+						"plant_type": {
+							"type": "string"
+						},
+						"nominal_power": {
+							"type": "number"
+						},
+						"deployment_date": {
+							"type": "string"
+						},
+						"owners": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							},
+							"properties": {
+								"person_id": {
+									"type": "number"
+								},
+								"first_name": {
+									"type": "string"
+								},
+								"last_name": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"person_id",
+								"first_name",
+								"last_name"
+							]
+						},
+						"location": {
+							"type": "object",
+							"properties": {
+								"location_id": {
+									"type": "number"
+								},
+								"country": {
+									"type": "string"
+								},
+								"district": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								},
+								"post_number": {
+									"type": "number"
+								},
+								"address": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"location_id",
+								"country",
+								"district",
+								"city",
+								"post_number",
+								"address"
+							]
+						},
+						"data": {
+							"type": "array",
+							"items": {
+								"type": "object"
+							},
+							"properties": {
+								"timestamp": {
+									"type": "string"
+								},
+								"plant_id": {
+									"type": "number"
+								},
+								"gen_volt1": {
+									"type": "number"
+								},
+								"gen_volt2": {
+									"type": "number"
+								},
+								"grid_volt1": {
+									"type": "number"
+								},
+								"grid_volt2": {
+									"type": "number"
+								},
+								"grid_volt3": {
+									"type": "number"
+								},
+								"gen_cur1": {
+									"type": "number"
+								},
+								"gen_cur2": {
+									"type": "number"
+								},
+								"grid_cur1": {
+									"type": "number"
+								},
+								"grid_cur2": {
+									"type": "number"
+								},
+								"grid_cur3": {
+									"type": "number"
+								},
+								"grid_pow": {
+									"type": "number"
+								},
+								"device_temp": {
+									"type": "number"
+								},
+								"device_status": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"timestamp",
+								"plant_id",
+								"gen_volt1",
+								"gen_volt2",
+								"grid_volt1",
+								"grid_volt2",
+								"grid_volt3",
+								"gen_cur1",
+								"gen_cur2",
+								"grid_cur1",
+								"grid_cur2",
+								"grid_cur3",
+								"grid_pow",
+								"device_temp",
+								"device_status"
+							]
+						}
+					},
+					"required": [
+						"plant_id",
+						"plant_name",
+						"plant_type",
+						"nominal_power",
+						"deployment_date",
+						"owners",
+						"location"
+					]
+				}
+			}
+		}
+	}
+}
