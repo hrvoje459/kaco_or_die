@@ -28,13 +28,13 @@ function App() {
           <Route
             path="/"
             element={
-              <Link to="/index">
+              <Link to="/index.html">
                 <h1>Go to index</h1>
               </Link>
             }
           />
-          <Route path="/index" element={<MyIndex />} />
-          <Route path="/datatable" element={<DataTable />} />
+          <Route path="/index.html" element={<MyIndex />} />
+          <Route path="/datatable.html" element={<DataTable />} />
         </Routes>
       </BrowserRouter>
     </div>

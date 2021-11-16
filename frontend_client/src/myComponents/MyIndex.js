@@ -26,7 +26,9 @@ function MyIndex() {
             <a href="https://github.com/hrvoje459/kaco_or_die">kaco_or_die</a>
           </h3>
           <h1>
-            <Link to="/datatable">Interaktivno sučelje za dohvat podataka</Link>
+            <Link to="/datatable.html">
+              Interaktivno sučelje za dohvat podataka
+            </Link>
           </h1>
           <a href="/kaco_monitoring_data.csv" target="_blank" download>
             <Button primary>Download JSON dump</Button>
