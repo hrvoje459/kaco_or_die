@@ -1,0 +1,206 @@
+{
+	"openapi": "3.0.3",
+	"info": {
+		"title": "Moja usluga",
+		"version": "1.2",
+		"contact": "hrvoje.rom@fer.hr",
+		"licence": "CC-BY-SA-4.0 License"
+	},
+	"paths": {
+		"/power_plant/{plant_id}": {
+			"get": {
+				"summary": "Get resource from collection by ID",
+				"description": "Vrati podatke o jednom postrojenju i sve zapisane podatke za to postrojenje",
+				"parameters": [
+					{
+						"name": "plant_id",
+						"in": "path",
+						"description": "ID of the resource",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Resources"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Fetch successfull"
+					},
+					"400": {
+						"description": "Invalid ID"
+					},
+					"404": {
+						"description": "Resource not found"
+					}
+				}
+			},
+			"put": {
+				"summary": "Change name of selected powerplant",
+				"description": "Change name of selected powerplant",
+				"parameters": [
+					{
+						"name": "plant_id",
+						"in": "path",
+						"description": "ID of the resource",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Resources"
+						}
+					},
+					{
+						"name": "plant_name",
+						"in": "query",
+						"description": "New name of the power plant",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Resources"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Name change successfull"
+					},
+					"400": {
+						"description": "Invalid ID or power plant name"
+					},
+					"404": {
+						"description": "No power plant with that id"
+					}
+				}
+			}
+		},
+		"/power_plant": {
+			"get": {
+				"summary": "Get all powerplants and their data",
+				"description": "Vrati podatke o svim postrojenjima i sve zapisane podatke za postrojenja",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Fetch successfull"
+					},
+					"400": {
+						"description": "Invalid ID"
+					},
+					"404": {
+						"description": "No power plants registered"
+					}
+				}
+			}
+		},
+		"/person": {
+			"get": {
+				"summary": "Get all persons",
+				"description": "Vrati podatke o svim osobama ",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Fetch successfull"
+					},
+					"400": {
+						"description": "Invalid ID"
+					},
+					"404": {
+						"description": "Person not found"
+					}
+				}
+			},
+			"post": {
+				"summary": "Create new person",
+				"description": "Stvori novu osobu",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Uspješno stvorena osoba"
+					},
+					"400": {
+						"description": "Missing or wrong names"
+					}
+				}
+			},
+			"delete": {
+				"summary": "Delete existing person",
+				"description": "Izbrisi osobu, ako nije vlasnik postrojenja",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Uspješno obrisana osoba"
+					},
+					"400": {
+						"description": "Neuspjesno brisanje, osoba je vlasnik postrojenja"
+					},
+					"404": {
+						"description": "Neuspjesno brisanje, osoba ne postoji u bazi"
+					}
+				}
+			}
+		},
+		"/person/{person__id}": {
+			"get": {
+				"summary": "Get person  by ID",
+				"description": "Dohvati podatke o osobi s ID-jem",
+				"parameters": [
+					{
+						"name": "person__id",
+						"in": "path",
+						"description": "ID of the resource",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Resources"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Fetch successfull"
+					},
+					"400": {
+						"description": "Invalid ID"
+					},
+					"404": {
+						"description": "Person not found"
+					}
+				}
+			}
+		},
+		"/location": {
+			"get": {
+				"summary": "Get all locations",
+				"description": "Dohvati podatke o svim lokacijama ",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Fetch successfull"
+					},
+					"400": {
+						"description": "Invalid ID"
+					},
+					"404": {
+						"description": "Person not found"
+					}
+				}
+			}
+		},
+		"/openapi": {
+			"get": {
+				"summary": "Get openapi specification",
+				"description": "Dohvati openapi specifikaciju u json-u",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "Fetch successfull"
+					},
+					"400": {
+						"description": "Error"
+					},
+					"404": {
+						"description": "Not found"
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Resources": {}
+	}
+}
