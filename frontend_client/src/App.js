@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import MyIndex from "./myComponents/MyIndex";
 import DataTable from "./myComponents/DataTable";
+import Profile from "./myComponents/Profile";
 
 import { Helmet } from "react-helmet";
 
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="/index.html" element={<MyIndex />} />
           <Route path="/datatable.html" element={<DataTable />} />
+          <Route path="/profile.html" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </div>

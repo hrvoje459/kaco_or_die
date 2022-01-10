@@ -1,11 +1,59 @@
 const { Pool, Client } = require("pg");
 const fs = require("fs");
 var validation = require("validator");
+const { exec } = require("child_process");
 
 const express = require("express");
 const { brotliCompressSync } = require("zlib");
 const { type } = require("os");
 const app = express();
+
+var jwt = require("express-jwt");
+var jwks = require("jwks-rsa");
+
+var jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: "https://dev-uet71f9q.us.auth0.com/.well-known/jwks.json",
+  }),
+  audience: "http://localhost:3000/refresh",
+  issuer: "https://dev-uet71f9q.us.auth0.com/",
+  algorithms: ["RS256"],
+});
+
+app.get("/authorized", jwtCheck, function (req, res) {
+  exec("node ../scripts/jsonBackup.js", (error, stdout, stderr) => {
+    if (error) {
+      console.log(`error: ${error.message}`);
+      return;
+    }
+    if (stderr) {
+      console.log(`stderr: ${stderr}`);
+      return;
+    }
+    //console.log(`stdout: ${stdout}`);
+  });
+  /* exec(
+    `sudo psql postgresql://kaco:supertajnipass@postgre.local.hrvoje:5432/kaco_monitoring_db -c "\copy (select power_plant.plant_id, power_plant.plant_name, power_plant.plant_type, power_plant.nominal_power, power_plant.deployment_date,person.person_id, person.first_name, person.last_name,data_entry.timestamp, data_entry.gen_volt1, data_entry.gen_volt2, data_entry.grid_volt1, data_entry.grid_volt2, data_entry.grid_volt3,data_entry.gen_cur1, data_entry.gen_cur2, data_entry.grid_cur1, data_entry.grid_cur2, data_entry.grid_cur3, data_entry.grid_pow,data_entry.device_temp, data_entry.device_status,location.location_id, location.country, location.district, location.city, location.post_number, location.address from power_plant left join data_entry on power_plant.plant_id = data_entry.plant_id left join location on power_plant.location_id = location.location_id left join owned_by on power_plant.plant_id = owned_by.plant_id left join person on owned_by.person_id = person.person_id) To '~/test.csv' With CSV DELIMITER ',' HEADER;"`,
+    (error, stdout, stderr) => {
+      if (error) {
+        console.log("bio tu 1");
+        console.log(`error: ${error.message}`);
+        return;
+      }
+      if (stderr) {
+        console.log("bio tu 2");
+        console.log(`stderr: ${stderr}`);
+        return;
+      }
+      console.log("bio tu 3");
+      console.log(`stdout: ${stdout}`);
+    }
+  ); */
+  res.send("Secured Resource");
+});
 
 const PORT = process.env.PORT || 3001;
 
@@ -450,6 +498,19 @@ app.get("/location", (req, res) => {
       }
       /* console.log(JSON.stringify(bes.rows[0].json_agg[0].power_plant)); */
       res.setHeader("Content-Type", "application/json");
+      for (let index = 0; index < bes.rows[0].json_agg.length; index++) {
+        // const element = array[index];
+
+        bes.rows[0].json_agg[index]["@type"] = "postalAddress";
+        bes.rows[0].json_agg[index]["@context"] = {};
+        bes.rows[0].json_agg[index]["@context"]["@vocab"] =
+          "https://schema.org/";
+        bes.rows[0].json_agg[index]["@context"]["country"] = "addressCountry";
+        bes.rows[0].json_agg[index]["@context"]["district"] = "addressRegion";
+        bes.rows[0].json_agg[index]["@context"]["post_number"] = "postalCode";
+        bes.rows[0].json_agg[index]["@context"]["address"] = "streetAddress";
+        bes.rows[0].json_agg[index]["@context"]["city"] = "addressLocality";
+      }
       res.json(
         JSON.parse(
           "{" +

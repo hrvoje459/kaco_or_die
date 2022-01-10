@@ -1,0 +1,55 @@
+
+
+
+//GET
+
+/power_plant			dohvati cijelu bazu u jsonu
+
+/power_plant/{plant_id}		dohvati sve data entryejaee za jedan powerplant
+
+
+
+
+/person				dohvati sve vlasnike elektrana
+
+/person/{person_id}	dohvati informacije o jednoj osoboi
+
+/location				dohvati sve lokacije na kojima se nalaze elektrane
+
+
+
+/openapi				dohvati openapi specifikaciju
+
+
+
+//POST
+
+/person					stvori novu osobu
+
+
+
+//PUT 
+
+/power_plant/name			promjeni ime postrojenja
+
+
+
+//DELETE
+
+/person					izbrisi osobu ako nije vlasnik postrojenja
+
+
+
+
+
+kako doći do bearer tokena
+
+https://manage.auth0.com/dashboard/us/dev-uet71f9q/apis/61da0048a28617003f33affe/explorer
+
+
+promjena profilne:
+ curl --request PATCH   --url 'https://dev-uet71f9q.us.auth0.com/api/v2/users/auth0|61db1168f98384007046c680'   --header 'authorization: Bearer jako_dugacak_token'   --header 'content-type: application/json'   --data '{"picture": "https://www.fer.unizg.hr/_download/portfolio/2%20Branimir%20Pervan.JPG"}'
+
+
+
+INSERT INTO power_plant(plant_name, plant_type, nominal_power, deployment_date, location_id) VALUES('drugo_prazno_postrojenje', 'upac_s_vlastitom_proizvodnjom', 55555, CURRENT_TIMESTAMP, 2)

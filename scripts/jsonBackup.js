@@ -41,8 +41,8 @@ pool.query(fetchJsonFromDb, (err, res) => {
   } else {
     /*console.log(JSON.stringify(res.rows[0].json_build_object, null, 4));*/
     console.log(JSON.stringify(res.rows, null, 4));
-    fs.appendFile(
-      "json_backupo.json",
+    fs.writeFile(
+      "../frontend_client/public/kaco_monitoring_data.json",
       /*JSON.stringify(res.rows[0].json_build_object, null, 4),*/
       JSON.stringify(res.rows, null, 4),
       function (err) {

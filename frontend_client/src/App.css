@@ -32,3 +32,25 @@
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+.login_redak {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.login_button {
+  width: 150px;
+}
+.logout_button {
+  width: 150px;
+}
+.preslika_profil_redak {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.profilna_slika {
+  width: 20vw;
+}
